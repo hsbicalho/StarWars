@@ -6,6 +6,7 @@ const TableContext = createContext();
 
 function TableProvider({ children }) {
   const [data, setData] = useState([]);
+
   const requestPlanets = async () => {
     const aux = await fetchPlanets();
     setData(aux.results);

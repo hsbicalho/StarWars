@@ -6,21 +6,42 @@ import tableHeader from '../public/tableHeader';
 function Table() {
   const { planetFilter } = useFilterPlanets();
   const { data } = useDataPlanets();
-  const filteredPlanetsFromData = data.filter(
+
+  let planetsFromData = data.filter(
     (planet) => planet.name.toLowerCase()
       .includes(planetFilter.filterByName.name.toLowerCase()),
   );
+
+  planetFilter.filterByNumericValues.forEach((filters) => {
+    const { column, value, comparison } = filters;
+    if (comparison === 'maior que') {
+      planetsFromData = planetsFromData.filter(
+        (planet) => Number(planet[column]) > Number(value),
+      );
+    }
+    if (comparison === 'menor que') {
+      planetsFromData = planetsFromData.filter(
+        (planet) => Number(planet[column]) < Number(value),
+      );
+    }
+    if (comparison === 'igual a') {
+      planetsFromData = planetsFromData.filter(
+        (planet) => Number(planet[column]) === Number(value),
+      );
+    }
+  });
+
   return (
     <div>
       <table>
         {
           <thead>
             <tr>
-              {tableHeader.map((column) => (<th key={ column }>{column}</th>))}
+              {tableHeader.map((header) => (<th key={ header }>{header}</th>))}
             </tr>
           </thead>
         }
-        {filteredPlanetsFromData.map((planet) => (
+        {planetsFromData.map((planet) => (
           <tbody key={ planet.name }>
             <tr>
               <td>{planet.name}</td>

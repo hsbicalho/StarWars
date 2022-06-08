@@ -8,6 +8,7 @@ function FilterProvider({ children }) {
     filterByName: {
       name: '',
     },
+    filterByNumericValues: [],
   });
 
   return (
@@ -18,7 +19,7 @@ function FilterProvider({ children }) {
 }
 
 FilterProvider.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.object,
 }.isRequired;
 const useFilterPlanets = () => {
   const context = useContext(FilterContext);
