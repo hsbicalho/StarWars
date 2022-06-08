@@ -13,9 +13,10 @@ function Filter() {
     setPlanetFilter({ ...planetFilter, filterByName: { name: target.value } });
   }
   function handleClick() {
-    setPlanetFilter(() => ({
+    setPlanetFilter((prevState) => ({
       ...planetFilter,
       filterByNumericValues: [
+        ...prevState.filterByNumericValues,
         {
           column,
           comparison,
