@@ -8,6 +8,7 @@ function Filter() {
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [value, setValue] = useState(0);
+  const [optionsState, setOptionsState] = useState(options);
 
   function handleChange({ target }) {
     setPlanetFilter({ ...planetFilter, filterByName: { name: target.value } });
@@ -24,6 +25,8 @@ function Filter() {
         },
       ],
     }));
+    const newOptions = optionsState.filter((option) => option !== column);
+    setOptionsState(newOptions);
   }
   return (
     <div>
@@ -40,7 +43,7 @@ function Filter() {
             value={ column }
             onChange={ ({ target }) => setColumn(target.value) }
           >
-            {options.map((option) => (<option key={ option }>{option}</option>))}
+            {optionsState.map((option) => (<option key={ option }>{option}</option>))}
           </select>
           <select
             data-testid="comparison-filter"
