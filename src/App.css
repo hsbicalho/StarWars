@@ -25,6 +25,10 @@
   min-height: 100vh;
 }
 
+.App-footer{
+  background-color: aliceblue;
+}
+
 .App-link {
   color: #61dafb;
 }
